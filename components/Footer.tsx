@@ -57,9 +57,7 @@ export default function Footer() {
             </span>
 
 
-            <span className="block mt-1 text-white/90">
-              Phone: <a href="tel:+447828760930" className="text-[#ccc] hover:text-blue-400 transition">+44 7828 760930</a>
-            </span>
+     
             <span className="block mt-2">
               <span className="text-white/90">Email: info@vehiclehealthanalysis.com</span>
             </span>
