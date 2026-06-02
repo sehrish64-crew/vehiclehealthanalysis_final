@@ -19,9 +19,24 @@ interface GetReportFormProps {
 
 const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'RVS', 'Caravan', 'Motorhome', 'Campervan']
 const packages = [
-  { id: 'basic', name: 'Basic Report' },
-  { id: 'standard', name: 'Standard Report' },
-  { id: 'premium', name: 'Premium Report' },
+  {
+    id: 'basic',
+    name: 'Basic Report',
+    stripeUrl: 'https://buy.stripe.com/dRm00c3vB1Z87U46NC9MY00',
+   
+  },
+  {
+    id: 'standard',
+    name: 'Standard Report',
+    stripeUrl: 'https://buy.stripe.com/dRm8wIc279rA8Y89ZO9MY08',
+  
+  },
+  {
+    id: 'premium',
+    name: 'Premium Report',
+    stripeUrl: 'https://buy.stripe.com/9B6bIUgin1Z82zK4Fu9MY02',
+   
+  },
 ]
 
 export default function GetReportForm({ isOpen, onClose, preselectedPackage, prefilledIdentType, prefilledIdentValue }: GetReportFormProps) {
@@ -99,8 +114,13 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
       // Store payment form data in sessionStorage for use on payment page
       sessionStorage.setItem('paymentFormData', JSON.stringify(formData))
       
-      // Redirect to payment page
-      window.location.href = '/checkout'
+      // Redirect to the selected package Stripe checkout link if available
+      const selectedPackageData = packages.find((pkg) => pkg.id === selectedPackage)
+      if (selectedPackageData?.stripeUrl) {
+        window.location.href = selectedPackageData.stripeUrl
+      } else {
+        window.location.href = '/checkout'
+      }
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to process payment. Please try again.'
@@ -289,44 +309,16 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                         'USD'
                       )}
                     </div>
+                    <a
+                      href={pkg.stripeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block mt-3 text-xs text-[#0f4c81] font-semibold hover:underline"
+                    >
+                      {pkg.stripeLabel}
+                    </a>
                   </button>
                 ))}
-              </div>
-            </div>
-
-            {/* Quick Transport Links */}
-            <div className="space-y-3 rounded-2xl border border-dashed border-[#0f4c81]/40 bg-[#f8fbff] p-4">
-              <Label className="block text-sm font-semibold text-foreground">
-                Quick Transport Options
-              </Label>
-              <p className="text-xs text-muted-foreground">
-                Need fast transport? Use one of these Stripe links to book a quick transport service.
-              </p>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <a
-                  href="https://buy.stripe.com/9B6bIUgin1Z82zK4Fu9MY02"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-xl border border-[#0f4c81]/30 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0f4c81] hover:bg-[#0f4c81]/5 transition"
-                >
-                  $80 Quick Premium Transport
-                </a>
-                <a
-                  href="https://buy.stripe.com/dRm8wIc279rA8Y89ZO9MY08"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-xl border border-[#0f4c81]/30 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0f4c81] hover:bg-[#0f4c81]/5 transition"
-                >
-                  $65 Quick Auto Transportation
-                </a>
-                <a
-                  href="https://buy.stripe.com/dRm00c3vB1Z87U46NC9MY00"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-xl border border-[#0f4c81]/30 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0f4c81] hover:bg-[#0f4c81]/5 transition"
-                >
-                  $50 Vehicle Transport
-                </a>
               </div>
             </div>
 
