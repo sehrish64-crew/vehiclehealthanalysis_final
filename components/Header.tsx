@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { X, Menu } from 'lucide-react'
 import { useTranslations } from '@/lib/translations'
@@ -18,12 +19,19 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-[40] bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
 
             {/* LOGO */}
-            <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="Vehicle Health Analysis" className="h-9 sm:h-10 w-auto" />
+            <Link href="/" className="flex items-center gap-2 max-w-[160px] sm:max-w-[220px] min-w-0">
+              <Image
+                src="/logo.png"
+                alt="Vehicle Health Analysis"
+                width={220}
+                height={48}
+                className="h-8 sm:h-10 lg:h-12 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* NAV */}
@@ -74,7 +82,13 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[100] bg-white p-6">
           <div className="flex justify-between items-center mb-8">
-            <img src="/logo.png" className="h-8" />
+            <Image
+              src="/logo.png"
+              alt="Vehicle Health Analysis"
+              width={180}
+              height={36}
+              className="h-6 sm:h-8 w-auto object-contain"
+            />
             <button onClick={() => setIsMobileMenuOpen(false)}>
               <X />
             </button>

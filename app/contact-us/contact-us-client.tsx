@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Mail, Phone, MapPin, Send, Car, MessageCircle, Clock } from 'lucide-react'
+import { Mail, Send, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -15,12 +15,6 @@ const contactInfo = [
     title: 'Email',
     details: ['info@vehiclehealthanalysis.com'],
     gradient: 'from-[#0f4c81] to-blue-900'
-  },
-  {
-    icon: MapPin,
-    title: 'Office',
-    details: ['SIU OFFICES, 4-6 GREATOREX STREET LONDON UNITED KINGDOM E1 5NF'],
-    gradient: 'from-[#0f4c81] to-blue-800'
   }
 ]
 
