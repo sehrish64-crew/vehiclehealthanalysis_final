@@ -60,7 +60,7 @@ export default function WhyVehicleHealthAnalysis() {
                   Starting from
                 </div>
                 <div className="text-4xl md:text-6xl font-bold text-[#0f4c81] drop-shadow-lg">
-                  $40
+                  $50
                 </div>
               </div>
 

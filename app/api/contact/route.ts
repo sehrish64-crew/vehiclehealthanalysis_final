@@ -14,14 +14,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const conn = await pool.getConnection()
     try {
-      await conn.execute(
-        'INSERT INTO contact_submissions (name, email, phone_number, whatsapp_number, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
-        [name, email, phone || null, whatsapp || null, subject, message, 'new']
-      )
-    } finally {
-      conn.release()
+      const conn = await pool.getConnection()
+      try {
+        await conn.execute(
+          'INSERT INTO contact_submissions (name, email, phone_number, whatsapp_number, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
+          [name, email, phone || null, whatsapp || null, subject, message, 'new']
+        )
+      } finally {
+        conn.release()
+      }
+      console.log('📥 Contact submission stored in database for:', email)
+    } catch (dbError) {
+      console.warn('⚠️ Database storage unavailable for contact form; continuing without DB persistence:', dbError)
     }
 
     // Send confirmation email to user

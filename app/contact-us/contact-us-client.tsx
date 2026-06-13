@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Mail, Send, MessageCircle, Phone } from 'lucide-react'
+import { Mail, Send, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -16,17 +16,17 @@ const contactInfo = [
     details: ['info@vehiclehealthanalysis.com'],
     gradient: 'from-[#0f4c81] to-blue-900'
   },
-  {
-    icon: Phone,
-    title: 'WhatsApp',
-    details: ['+44 7555 979712'],
-    gradient: 'from-emerald-500 to-green-700'
-  }
+  // {
+  //   icon: Phone,
+  //   title: 'WhatsApp',
+  //   details: ['+44 7555 979712'],
+  //   gradient: 'from-emerald-500 to-green-700'
+  // }
 ]
 
 export default function ContactUsClient() {
   const { t } = useTranslations()
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', whatsapp: '', subject: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [isVisible, setIsVisible] = useState(false)
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -57,7 +57,7 @@ export default function ContactUsClient() {
       if (!res.ok) throw new Error(data.error || 'Failed')
 
       setSubmitSuccess(true)
-      setFormData({ name: '', email: '', phone: '', whatsapp: '', subject: '', message: '' })
+      setFormData({ name: '', email: '', subject: '', message: '' })
     } catch (err: any) {
       setSubmitError(err.message || 'Something went wrong')
     } finally {
@@ -140,22 +140,6 @@ export default function ContactUsClient() {
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-5">
-              <Input
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-
-              <Input
-                type="tel"
-                placeholder="WhatsApp Number"
-                value={formData.whatsapp}
-                onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
               />
             </div>
 
