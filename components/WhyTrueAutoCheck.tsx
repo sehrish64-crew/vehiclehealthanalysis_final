@@ -250,13 +250,13 @@ export default function WhyAutoFactsCheck() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-3xl md:text-4xl font-black text-white drop-shadow-lg">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow-lg">
                     1,000,000+
                   </h3>
-                  <p className="text-xl md:text-2xl font-bold text-white drop-shadow-md">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-white drop-shadow-md">
                     Trusted Users Globally
                   </p>
-                  <p className="text-lg text-white/90 drop-shadow-md">
+                  <p className="text-sm sm:text-lg text-white/90 drop-shadow-md leading-relaxed">
                     Across 150+ nations
                   </p>
                 </div>
@@ -276,7 +276,7 @@ export default function WhyAutoFactsCheck() {
               {/* Right: Partner Logos with Enhanced Layout */}
               <div className="space-y-8">
                 <div className="text-center md:text-left">
-                  <p className="text-sm font-bold text-white/80 mb-6 uppercase tracking-wider">Trusted by millions worldwide By Industry Leaders</p>
+                  <p className="text-xs sm:text-sm font-bold text-white/80 mb-4 sm:mb-6 uppercase tracking-wider">Trusted by millions worldwide By Industry Leaders</p>
                   <div className="grid grid-cols-2 gap-6 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                     <div className="flex items-center justify-center md:justify-start">
                       <Image

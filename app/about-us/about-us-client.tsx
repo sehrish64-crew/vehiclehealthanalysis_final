@@ -80,17 +80,17 @@ export default function AboutUsClient() {
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#0f4c8115,transparent_60%)]" />
 
-        <div className="container mx-auto px-4 py-20 text-center max-w-4xl">
+        <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20 text-center max-w-4xl">
 
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0f4c81]/10 text-[#0f4c81] font-semibold border border-[#0f4c81]/20">
+          <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-[#0f4c81]/10 text-[#0f4c81] font-semibold border border-[#0f4c81]/20 text-xs sm:text-sm">
             <Shield size={16} /> About Vehicle Health Analysis
           </span>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold mt-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mt-4 sm:mt-6 leading-tight">
             Driving <span className="text-[#0f4c81]">Trust</span> Through Vehicle Data
           </h1>
 
-          <p className="text-gray-600 mt-5 text-lg">
+          <p className="text-gray-600 mt-4 sm:mt-5 text-sm sm:text-base md:text-lg">
             Vehicle Health Analysis is a digital vehicle history platform built to help people make safer,
             smarter, and more transparent car buying decisions.
           </p>
@@ -99,44 +99,44 @@ export default function AboutUsClient() {
       </div>
 
       {/* STATS */}
-      <div className="container mx-auto px-4 py-14">
+      <div className="container mx-auto px-4 py-10 sm:py-12 md:py-14">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
 
           {stats.map((s, i) => (
             <div
               key={i}
-              className="group bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl hover:border-[#0f4c81]/30 transition-all"
+              className="group bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 text-center shadow-sm hover:shadow-xl hover:border-[#0f4c81]/30 transition-all"
             >
               <div className="w-12 h-12 mx-auto rounded-xl bg-[#0f4c81]/10 flex items-center justify-center group-hover:scale-110 transition">
                 <s.icon className="text-[#0f4c81]" />
               </div>
 
-              <h2 className="text-3xl font-bold mt-3 text-gray-900">
+              <h2 className="text-2xl sm:text-3xl font-bold mt-3 text-gray-900">
                 {counters[i]}{s.suffix}
               </h2>
 
-              <p className="text-sm text-gray-600 mt-1">{s.label}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mt-1">{s.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* STORY */}
-      <div className="bg-gradient-to-b from-white to-gray-50 py-16">
+      <div className="bg-gradient-to-b from-white to-gray-50 py-10 sm:py-12 md:py-16">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
 
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5">
 
-            <h2 className="text-3xl md:text-5xl font-bold">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
               Why We Built <span className="text-[#0f4c81]">Vehicle Health Analysis</span>
             </h2>
 
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
               Buying a used car can be risky. Hidden accidents, mileage fraud, and incomplete history
               often lead to financial loss. We created Vehicle Health Analysis to solve this problem.
             </p>
 
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm sm:text-base">
               Our platform gives you instant access to verified vehicle history reports so you can
               avoid scams and make confident decisions before buying any vehicle.
             </p>
@@ -178,13 +178,13 @@ export default function AboutUsClient() {
       </div>
 
       {/* VALUES */}
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-20">
 
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-4xl font-bold">
             Our <span className="text-[#0f4c81]">Core Values</span>
           </h2>
-          <p className="text-gray-600 mt-3">
+          <p className="text-gray-600 mt-2 sm:mt-3 text-sm sm:text-base">
             The principles that define how we build trust and deliver value
           </p>
         </div>
@@ -194,14 +194,14 @@ export default function AboutUsClient() {
           {values.map((v, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl border bg-white hover:shadow-xl hover:border-[#0f4c81]/30 transition"
+              className="p-5 sm:p-6 rounded-2xl border bg-white hover:shadow-xl hover:border-[#0f4c81]/30 transition"
             >
               <div className="w-12 h-12 rounded-xl bg-[#0f4c81]/10 flex items-center justify-center mb-4">
                 <v.icon className="text-[#0f4c81]" />
               </div>
 
-              <h3 className="text-xl font-bold">{v.title}</h3>
-              <p className="text-gray-600 mt-2">{v.description}</p>
+              <h3 className="text-lg sm:text-xl font-bold">{v.title}</h3>
+              <p className="text-gray-600 mt-2 text-sm sm:text-base">{v.description}</p>
             </div>
           ))}
 
@@ -209,17 +209,17 @@ export default function AboutUsClient() {
       </div>
 
       {/* CTA */}
-      <div className="bg-gradient-to-r from-[#0f4c81] to-black py-16 text-center text-white">
+      <div className="bg-gradient-to-r from-[#0f4c81] to-black py-12 sm:py-14 md:py-16 text-center text-white">
 
-        <h2 className="text-3xl md:text-5xl font-bold">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
           Start Your Vehicle Check Today
         </h2>
 
-        <p className="text-white/80 mt-3">
+        <p className="text-white/80 mt-3 text-sm sm:text-base">
           Get instant reports and protect yourself from risky car purchases
         </p>
 
-        <button className="mt-6 bg-white text-[#0f4c81] hover:bg-gray-200 font-bold px-8 py-3 rounded-xl">
+        <button className="mt-6 bg-white text-[#0f4c81] hover:bg-gray-200 font-bold px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-sm sm:text-base">
           Get Report Now
         </button>
 

@@ -137,22 +137,22 @@ export default function WhyVehicleHealthAnalysis() {
           <div className="relative p-10 md:p-16 text-white grid md:grid-cols-2 gap-10">
 
             <div>
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 leading-tight">
                 1,000,000+ Trusted Users
               </h3>
-              <p className="text-white/80">
+              <p className="text-sm sm:text-base text-white/80 leading-relaxed">
                 Across 150+ countries using secure VIN reports.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/10 p-4 rounded-xl">
-                <p className="text-2xl font-bold">4.8★</p>
-                <p className="text-xs text-white/70">Rating</p>
+                <p className="text-xl sm:text-2xl font-bold">4.8★</p>
+                <p className="text-[10px] sm:text-xs text-white/70">Rating</p>
               </div>
               <div className="bg-white/10 p-4 rounded-xl">
-                <p className="text-2xl font-bold">99.9%</p>
-                <p className="text-xs text-white/70">Uptime</p>
+                <p className="text-xl sm:text-2xl font-bold">99.9%</p>
+                <p className="text-[10px] sm:text-xs text-white/70">Uptime</p>
               </div>
             </div>
 

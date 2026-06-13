@@ -41,11 +41,11 @@ export default function FeaturesGrid() {
 
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-12 md:mb-16 animate-fade-in px-2 sm:px-4">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 leading-[1.2]">
+          <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 leading-tight sm:leading-[1.2]">
             Make Smarter Car Decisions with Verified History Reports
           </h2>
 
-          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm sm:text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
             Instantly uncover hidden issues, ownership records, mileage accuracy, and accident history with Vehicle Health Analysis.
           </p>
         </div>
@@ -74,13 +74,13 @@ export default function FeaturesGrid() {
         </div>
 
         {/* Content */}
-        <div className="mt-10">
+        <div className="mt-6 sm:mt-8 md:mt-10">
 
           {/* ODOMETER */}
           {activeTab === 'odometer' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/odometer-check-en@1x.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -103,9 +103,9 @@ export default function FeaturesGrid() {
 
           {/* OWNERSHIP */}
           {activeTab === 'ownership' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/ownership.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -128,9 +128,9 @@ export default function FeaturesGrid() {
 
           {/* PHOTOS */}
           {activeTab === 'photos' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/photos-sale.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -153,9 +153,9 @@ export default function FeaturesGrid() {
 
           {/* DAMAGE */}
           {activeTab === 'damage' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/damage.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -178,9 +178,9 @@ export default function FeaturesGrid() {
 
           {/* TECHNICAL */}
           {activeTab === 'technical' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/specification.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -203,9 +203,9 @@ export default function FeaturesGrid() {
 
           {/* STOLEN */}
           {activeTab === 'stolen' && (
-            <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-start">
 
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-56 sm:h-72 md:h-80">
                 <Image src="/stolen.webp" alt="" fill className="object-contain" />
               </div>
 
@@ -229,13 +229,13 @@ export default function FeaturesGrid() {
         </div>
 
         {/* Bottom Badge */}
-        <div className="mt-16 p-6 bg-[#0f4c81]/10 border border-[#0f4c81]/20 rounded-xl flex gap-4">
-          <div className="w-12 h-12 bg-[#0f4c81]/20 rounded-full flex items-center justify-center">
+        <div className="mt-10 sm:mt-16 p-4 sm:p-6 bg-[#0f4c81]/10 border border-[#0f4c81]/20 rounded-xl flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#0f4c81]/20 rounded-full flex items-center justify-center shrink-0">
             ✓
           </div>
           <div>
-            <h4 className="font-bold">Official NMVTIS Source</h4>
-            <p className="text-gray-600 text-sm">
+            <h4 className="text-base sm:text-lg font-bold">Official NMVTIS Source</h4>
+            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
               Vehicle Health Analysis is an approved NMVTIS provider helping prevent fraud and unsafe vehicle purchases.
             </p>
           </div>

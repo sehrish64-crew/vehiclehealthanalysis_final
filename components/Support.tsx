@@ -82,13 +82,13 @@ export default function Support() {
             <img
               key={index}
               src={image}
-              className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white shadow-lg"
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full border-2 sm:border-4 border-white shadow-lg"
             />
           ))}
         </div>
 
         {/* heading unchanged */}
-        <h2 className="text-4xl font-bold text-gray-900 text-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center leading-tight">
           Got questions?
           <br />
           <span className="text-[#0f4c81]">

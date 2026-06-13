@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const {
+      customerName,
+      customerPhone,
       customerEmail,
       vehicleIdentifier,
       vehicleType,
@@ -66,6 +68,8 @@ export async function POST(request: NextRequest) {
         
         <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #bfdbfe; margin: 20px 0;">
           <h3 style="margin-top: 0; color: #1e40af; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">Entry Details:</h3>
+          <p style="margin: 8px 0;"><strong>Full Name:</strong> ${customerName || 'Not provided'}</p>
+          <p style="margin: 8px 0;"><strong>Phone Number:</strong> ${customerPhone || 'Not provided'}</p>
           <p style="margin: 8px 0;"><strong>Customer Email:</strong> ${customerEmail}</p>
           <p style="margin: 8px 0;"><strong>Vehicle Type:</strong> ${vehicleType}</p>
           <p style="margin: 8px 0;"><strong>VIN / License Plate:</strong> ${vehicleIdentifier}</p>
@@ -96,10 +100,10 @@ export async function POST(request: NextRequest) {
     try {
       await pool.query(
         `INSERT INTO report_submissions (
-          customer_email, vehicle_identifier, vehicle_type,
+          customer_name, customer_phone, customer_email, vehicle_identifier, vehicle_type,
           package_id, amount, currency, submitted_at
-        ) VALUES (?, ?, ?, ?, ?, ?, NOW())`,
-        [customerEmail, vehicleIdentifier, vehicleType, packageId, amount, currency]
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
+        [customerName || null, customerPhone || null, customerEmail, vehicleIdentifier, vehicleType, packageId, amount, currency]
       )
       console.log('✅ Submission saved to database')
     } catch (dbError) {

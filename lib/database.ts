@@ -134,18 +134,20 @@ export interface ContactSubmission {
   id: number;
   name: string;
   email: string;
+  phone_number?: string | null;
+  whatsapp_number?: string | null;
   subject: string;
   message: string;
   status: 'new' | 'read' | 'handled' | 'deleted';
   created_at: string;
 }
 
-export async function insertContactSubmission(submission: { name: string; email: string; subject: string; message: string; status?: string }) {
+export async function insertContactSubmission(submission: { name: string; email: string; phone_number?: string | null; whatsapp_number?: string | null; subject: string; message: string; status?: string }) {
   const conn = await pool.getConnection();
   try {
     const [result]: any = await conn.execute(
-      'INSERT INTO contact_submissions (name, email, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, NOW())',
-      [submission.name, submission.email, submission.subject, submission.message, submission.status || 'new']
+      'INSERT INTO contact_submissions (name, email, phone_number, whatsapp_number, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
+      [submission.name, submission.email, submission.phone_number || null, submission.whatsapp_number || null, submission.subject, submission.message, submission.status || 'new']
     );
     const insertId = result.insertId;
     const [rows]: any = await conn.execute('SELECT * FROM contact_submissions WHERE id = ?', [insertId]);

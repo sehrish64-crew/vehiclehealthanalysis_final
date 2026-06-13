@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Mail, Send, MessageCircle } from 'lucide-react'
+import { Mail, Send, MessageCircle, Phone } from 'lucide-react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -15,12 +15,18 @@ const contactInfo = [
     title: 'Email',
     details: ['info@vehiclehealthanalysis.com'],
     gradient: 'from-[#0f4c81] to-blue-900'
+  },
+  {
+    icon: Phone,
+    title: 'WhatsApp',
+    details: ['+44 7555 979712'],
+    gradient: 'from-emerald-500 to-green-700'
   }
 ]
 
 export default function ContactUsClient() {
   const { t } = useTranslations()
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', whatsapp: '', subject: '', message: '' })
   const [isVisible, setIsVisible] = useState(false)
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -51,7 +57,7 @@ export default function ContactUsClient() {
       if (!res.ok) throw new Error(data.error || 'Failed')
 
       setSubmitSuccess(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', whatsapp: '', subject: '', message: '' })
     } catch (err: any) {
       setSubmitError(err.message || 'Something went wrong')
     } finally {
@@ -68,39 +74,39 @@ export default function ContactUsClient() {
       <div className="absolute -top-20 left-10 w-96 h-96 bg-[#0f4c81]/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-10 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl"></div>
 
-      <div ref={heroRef} className="relative container mx-auto px-4 py-16">
+      <div ref={heroRef} className="relative container mx-auto px-4 py-10 sm:py-14 md:py-16">
 
         {/* HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-[#0f4c81]/10 border border-[#0f4c81]/20 rounded-full text-[#0f4c81] font-semibold">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 bg-[#0f4c81]/10 border border-[#0f4c81]/20 rounded-full text-[#0f4c81] font-semibold text-xs sm:text-sm">
             <MessageCircle size={16} />
             Get in Touch
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold mt-6 text-gray-900">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mt-4 sm:mt-6 text-gray-900">
             Contact <span className="text-[#0f4c81]">Vehicle Health Analysis</span>
           </h1>
 
-          <p className="text-gray-600 mt-4 text-lg">
+          <p className="text-gray-600 mt-3 sm:mt-4 text-sm sm:text-base md:text-lg">
             We’re here to help you with vehicle history reports & support anytime.
           </p>
         </div>
 
         {/* CONTACT CARDS */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-12">
           {contactInfo.map((item, i) => (
             <div
               key={i}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group bg-white rounded-2xl p-4 sm:p-6 border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white`}>
                 <item.icon />
               </div>
 
-              <h3 className="text-xl font-bold mt-4 text-gray-900">{item.title}</h3>
+              <h3 className="text-lg sm:text-xl font-bold mt-4 text-gray-900">{item.title}</h3>
 
               {item.details.map((d, idx) => (
-                <p key={idx} className="text-gray-600 text-sm mt-1">
+                <p key={idx} className="text-gray-600 text-xs sm:text-sm mt-1">
                   {d}
                 </p>
               ))}
@@ -111,20 +117,20 @@ export default function ContactUsClient() {
         {/* FORM */}
         <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
 
-          <div className="bg-gradient-to-r from-[#0f4c81] to-black text-white p-6 md:p-10">
-            <h2 className="text-2xl md:text-3xl font-bold">
+          <div className="bg-gradient-to-r from-[#0f4c81] to-black text-white p-5 sm:p-6 md:p-10">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
               Send us a message
             </h2>
-            <p className="text-white/80 mt-2 text-sm">
+            <p className="text-white/80 mt-2 text-xs sm:text-sm">
               We usually respond within 2–4 hours
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-6 md:p-10 space-y-5">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-6 md:p-10 space-y-4 sm:space-y-5">
 
             <div className="grid md:grid-cols-2 gap-5">
               <Input
-                placeholder="Your Name"
+                placeholder="Full Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="focus:ring-[#0f4c81]"
@@ -134,6 +140,22 @@ export default function ContactUsClient() {
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5">
+              <Input
+                type="tel"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              />
+
+              <Input
+                type="tel"
+                placeholder="WhatsApp Number"
+                value={formData.whatsapp}
+                onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
               />
             </div>
 
@@ -161,7 +183,7 @@ export default function ContactUsClient() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#0f4c81] hover:bg-black text-white py-3 rounded-xl text-lg font-semibold transition-all"
+              className="w-full bg-[#0f4c81] hover:bg-black text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-lg font-semibold transition-all"
             >
               <Send className="mr-2" size={18} />
               {isSubmitting ? 'Sending...' : 'Send Message'}

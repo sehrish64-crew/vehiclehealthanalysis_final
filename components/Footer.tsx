@@ -56,8 +56,6 @@ export default function Footer() {
               An approved NMVTIS data provider.
             </span>
 
-
-     
             <span className="block mt-2">
               <span className="text-white/90">Email: info@vehiclehealthanalysis.com</span>
             </span>

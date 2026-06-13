@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
+  phone_number VARCHAR(40) DEFAULT NULL,
+  whatsapp_number VARCHAR(40) DEFAULT NULL,
   subject VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,
   status ENUM('new','read','responded') NOT NULL DEFAULT 'new',

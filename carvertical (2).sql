@@ -31,6 +31,7 @@ CREATE TABLE `contact_submissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `phone_number` varchar(40) DEFAULT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `status` enum('new','read','responded') NOT NULL DEFAULT 'new',

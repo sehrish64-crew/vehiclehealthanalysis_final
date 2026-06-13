@@ -5,7 +5,7 @@ import { sendEmail } from '@/app/api/send-email/route'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, subject, message } = body
+    const { name, email, phone = '', whatsapp = '', subject, message } = body
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
     const conn = await pool.getConnection()
     try {
       await conn.execute(
-        'INSERT INTO contact_submissions (name, email, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, NOW())',
-        [name, email, subject, message, 'new']
+        'INSERT INTO contact_submissions (name, email, phone_number, whatsapp_number, subject, message, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())',
+        [name, email, phone || null, whatsapp || null, subject, message, 'new']
       )
     } finally {
       conn.release()
@@ -63,8 +63,10 @@ export async function POST(request: NextRequest) {
           
           <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #bfdbfe; margin: 20px 0;">
             <h3 style="margin-top: 0; color: #1e40af; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">Submission Details:</h3>
-            <p style="margin: 8px 0;"><strong>Name:</strong> ${name}</p>
+            <p style="margin: 8px 0;"><strong>Full Name:</strong> ${name}</p>
             <p style="margin: 8px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p style="margin: 8px 0;"><strong>Phone Number:</strong> ${phone || 'Not provided'}</p>
+            <p style="margin: 8px 0;"><strong>WhatsApp Number:</strong> ${whatsapp || 'Not provided'}</p>
             <p style="margin: 8px 0;"><strong>Subject:</strong> ${subject}</p>
             <p style="margin: 8px 0;"><strong>Message:</strong></p>
             <p style="margin: 8px 0; color: #666; white-space: pre-wrap; padding: 10px; background: #f9f9f9; border-radius: 4px;">${message}</p>

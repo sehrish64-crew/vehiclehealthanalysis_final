@@ -117,26 +117,26 @@ export default function PricingClient() {
         {/* Glow Background */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-200/30 blur-3xl rounded-full"></div>
 
-        <div className="relative container mx-auto px-4 py-20">
+        <div className="relative container mx-auto px-4 py-12 sm:py-16 md:py-20">
 
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-4">
               <Sparkles className="w-4 h-4 text-[${PRIMARY}]" />
-              <span className="text-sm font-semibold text-gray-700">Simple & Transparent Pricing</span>
+              <span className="text-xs sm:text-sm font-semibold text-gray-700">Simple & Transparent Pricing</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900">
               Choose Your Plan
             </h1>
 
-            <p className="mt-4 text-gray-600 text-lg">
+            <p className="mt-4 text-gray-600 text-sm sm:text-base md:text-lg">
               Get instant vehicle history reports with trusted data sources.
             </p>
           </div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
 
             {pricingPlans.map((plan, i) => (
               <div
@@ -153,28 +153,28 @@ export default function PricingClient() {
                   {plan.badge}
                 </div>
 
-                <div className="p-8 text-center">
+                <div className="p-6 sm:p-7 md:p-8 text-center">
 
                   {/* Icon */}
                   <div className={`w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-4 ${plan.iconBg}`}>
                     <plan.icon className={`w-7 h-7 ${plan.iconColor}`} />
                   </div>
 
-                  <h3 className="text-2xl font-bold">{plan.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold">{plan.name}</h3>
 
                   <div className="mt-4">
-                    <span className="text-xl font-semibold">{plan.currency}</span>
-                    <span className="text-5xl font-bold">{plan.price}</span>
+                    <span className="text-lg sm:text-xl font-semibold">{plan.currency}</span>
+                    <span className="text-4xl sm:text-5xl font-bold">{plan.price}</span>
                   </div>
 
-                  <p className="text-sm text-gray-500 mt-2">One-time payment</p>
+                  <p className="text-xs sm:text-sm text-gray-500 mt-2">One-time payment</p>
 
                   {/* Features */}
                   <div className="mt-6 space-y-2 text-left">
                     {plan.features.map((f, idx) => (
                       <div key={idx} className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-[${PRIMARY}]" />
-                        <span className="text-sm text-gray-700">{f}</span>
+                        <span className="text-xs sm:text-sm text-gray-700">{f}</span>
                       </div>
                     ))}
                   </div>
@@ -182,7 +182,7 @@ export default function PricingClient() {
                   {/* Button */}
                   <button
                     onClick={() => handleSelectPlan(plan.priceKey)}
-                    className={`mt-6 w-full py-3 rounded-xl font-semibold text-white transition-all
+                    className={`mt-6 w-full py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold text-white transition-all
                     ${plan.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-[#0f4c81] hover:bg-[#0f4c81]'}`}
                   >
                     {plan.buttonText}
@@ -195,7 +195,7 @@ export default function PricingClient() {
           </div>
 
           {/* Note */}
-          <div className="text-center mt-12 text-gray-600 text-sm space-y-2">
+          <div className="text-center mt-10 sm:mt-12 text-gray-600 text-xs sm:text-sm space-y-2">
             <p>✔ One-time payment only — no subscriptions</p>
             <p>✔ 14-day money-back guarantee</p>
             <p>✔ Instant digital delivery</p>

@@ -18,28 +18,55 @@ interface GetReportFormProps {
 }
 
 const vehicleTypes = ['Car', 'Motorcycle', 'Truck', 'Boat', 'ATV', 'RVS', 'Caravan', 'Motorhome', 'Campervan']
-const packages = [
+const packages: Array<{ id: 'basic' | 'standard' | 'premium'; name: string; stripeUrl: string }> = [
   {
     id: 'basic',
     name: 'Basic Report',
     stripeUrl: 'https://buy.stripe.com/dRm00c3vB1Z87U46NC9MY00',
-   
   },
   {
     id: 'standard',
     name: 'Standard Report',
     stripeUrl: 'https://buy.stripe.com/dRm8wIc279rA8Y89ZO9MY08',
-  
   },
   {
     id: 'premium',
     name: 'Premium Report',
     stripeUrl: 'https://buy.stripe.com/9B6bIUgin1Z82zK4Fu9MY02',
-   
   },
 ]
 
 export default function GetReportForm({ isOpen, onClose, preselectedPackage, prefilledIdentType, prefilledIdentValue }: GetReportFormProps) {
+  const [vehicleIdType, setVehicleIdType] = useState<'vin' | 'plate'>('vin')
+  const [vehicleType, setVehicleType] = useState('')
+  const [vinNumber, setVinNumber] = useState('')
+  const [plateNumber, setPlateNumber] = useState('')
+  const [customerName, setCustomerName] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [selectedPackage, setSelectedPackage] = useState(preselectedPackage || '')
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // Prefill values coming from the banner when the form opens.
+  useEffect(() => {
+    if (!isOpen) return
+
+    if (prefilledIdentType === 'plate') {
+      setVehicleIdType('plate')
+      setPlateNumber(prefilledIdentValue || '')
+      setVinNumber('')
+    } else {
+      setVehicleIdType('vin')
+      setVinNumber(prefilledIdentValue || '')
+      setPlateNumber('')
+    }
+
+    if (preselectedPackage) {
+      setSelectedPackage(preselectedPackage)
+    }
+  }, [isOpen, prefilledIdentType, prefilledIdentValue, preselectedPackage])
+
   // Add dropdown styling
   useEffect(() => {
     if (!isOpen) return
@@ -61,20 +88,13 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
     }
   }, [isOpen])
 
-  const [vehicleIdType, setVehicleIdType] = useState<'vin' | 'plate'>('vin')
-  const [vehicleType, setVehicleType] = useState('')
-  const [vinNumber, setVinNumber] = useState('')
-  const [plateNumber, setPlateNumber] = useState('')
-  const [customerEmail, setCustomerEmail] = useState('')
-  const [selectedPackage, setSelectedPackage] = useState(preselectedPackage || '')
-  const [error, setError] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
   const validateForm = () => {
     setError('')
     if (!vehicleType) return setError('Select vehicle type'), false
     if (vehicleIdType === 'vin' && !vinNumber) return setError('Enter VIN'), false
     if (vehicleIdType === 'plate' && !plateNumber) return setError('Enter plate number'), false
+    if (!customerName.trim()) return setError('Enter full name'), false
+    if (!customerPhone.trim()) return setError('Enter phone number'), false
     if (!customerEmail) return setError('Enter email'), false
     if (!selectedPackage) return setError('Select a package'), false
     return true
@@ -90,6 +110,8 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
       const formData = {
         packageId: selectedPackage,
         currency: 'USD',
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim(),
         customerEmail,
         vehicleIdentifier: vehicleIdType === 'vin' ? vinNumber : plateNumber,
         vehicleType,
@@ -142,14 +164,14 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
       />
       
       {/* Modal Container */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-[9999] rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-[#0f4c81]/20 flex flex-col">
+      <div className="fixed inset-x-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-[9999] rounded-2xl sm:rounded-3xl shadow-2xl w-[calc(100vw-1.5rem)] max-w-2xl max-h-[95vh] overflow-hidden border border-[#0f4c81]/20 flex flex-col">
         {/* Header with gradient background */}
-        <div className="bg-gradient-to-r from-[#0f4c81] via-[#2d5ca1] to-[#0f4c81] border-b border-[#0f4c81]/30 px-8 py-6 flex items-center justify-between flex-shrink-0 relative z-10">
+        <div className="bg-gradient-to-r from-[#0f4c81] via-[#2d5ca1] to-[#0f4c81] border-b border-[#0f4c81]/30 px-4 py-4 sm:px-8 sm:py-6 flex items-start sm:items-center justify-between flex-shrink-0 relative z-10 gap-3">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
               Get Vehicle Report
             </h2>
-            <p className="text-xs text-white/80 mt-1">Quick and easy vehicle information</p>
+            <p className="text-[11px] sm:text-xs text-white/80 mt-1 leading-snug">Quick and easy vehicle information</p>
           </div>
           <button
             onClick={onClose}
@@ -161,14 +183,14 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
         </div>
 
         {/* Content */}
-        <div className="p-8 overflow-y-auto flex-1">
+        <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1">
           <form onSubmit={handleSubmit} className="space-y-7">
             {/* Search Type Selection */}
             <div className="bg-gradient-to-br from-[#0f4c81]/5 to-[#2d5ca1]/5 p-4 rounded-xl border border-[#0f4c81]/30">
               <Label className="block text-sm font-semibold text-foreground mb-3">
                 Search By
               </Label>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   type="button"
                   onClick={() => setVehicleIdType('vin')}
@@ -264,6 +286,39 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
               </Select>
             </div>
 
+            {/* Customer Name and Phone */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+              <div className="space-y-2">
+                <Label htmlFor="customerName" className="block text-sm font-semibold text-foreground">
+                  Full Name
+                </Label>
+                <Input
+                  id="customerName"
+                  type="text"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  placeholder="Enter full name"
+                  required
+                  className="h-12 border-2 border-[#0f4c81]/30 focus:border-[#0f4c81] focus:ring-2 focus:ring-[#0f4c81]/20 bg-white transition-colors"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="customerPhone" className="block text-sm font-semibold text-foreground">
+                  Phone Number
+                </Label>
+                <Input
+                  id="customerPhone"
+                  type="tel"
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                  placeholder="Enter phone number"
+                  required
+                  className="h-12 border-2 border-[#0f4c81]/30 focus:border-[#0f4c81] focus:ring-2 focus:ring-[#0f4c81]/20 bg-white transition-colors"
+                />
+              </div>
+            </div>
+
             {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email" className="block text-sm font-semibold text-foreground">
@@ -288,7 +343,7 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
               <Label className="block text-sm font-semibold text-foreground">
                 Select Your Package
               </Label>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {packages.map((pkg) => (
                   <button
                     key={pkg.id}
@@ -309,14 +364,9 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
                         'USD'
                       )}
                     </div>
-                    <a
-                      href={pkg.stripeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block mt-3 text-xs text-[#0f4c81] font-semibold hover:underline"
-                    >
-                      {pkg.stripeLabel}
-                    </a>
+                    <span className="mt-3 block text-xs text-[#0f4c81] font-semibold">
+                      Select package
+                    </span>
                   </button>
                 ))}
               </div>
@@ -330,19 +380,19 @@ export default function GetReportForm({ isOpen, onClose, preselectedPackage, pre
             )}
 
             {/* Action Buttons */}
-            <div className="flex gap-3 pt-4 border-t border-[#0f4c81]/20">
+            <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 border-t border-[#0f4c81]/20">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="flex-1 h-12 rounded-lg font-semibold border-2 border-[#0f4c81]/30 text-foreground hover:bg-[#0f4c81]/5 hover:border-[#0f4c81]/60"
+                className="w-full sm:flex-1 h-12 rounded-lg font-semibold border-2 border-[#0f4c81]/30 text-foreground hover:bg-[#0f4c81]/5 hover:border-[#0f4c81]/60"
                 disabled={isSubmitting}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="flex-1 h-12 rounded-lg font-semibold bg-gradient-to-r from-[#0f4c81] to-[#0f4c81] hover:from-[#0f4c81] hover:to-[#480000] text-white shadow-lg shadow-[#0f4c81]/40 disabled:opacity-60 transition-all"
+                className="w-full sm:flex-1 h-12 rounded-lg font-semibold bg-gradient-to-r from-[#0f4c81] to-[#0f4c81] hover:from-[#0f4c81] hover:to-[#480000] text-white shadow-lg shadow-[#0f4c81]/40 disabled:opacity-60 transition-all"
                 disabled={isSubmitting || !selectedPackage}
               >
                 {isSubmitting

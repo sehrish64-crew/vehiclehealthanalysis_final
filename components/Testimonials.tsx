@@ -86,16 +86,16 @@ export default function Testimonials() {
         {/* HEADER */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
             {t('testimonials_title')}
           </h2>
-          <p className="text-gray-700 text-lg mb-6">
+          <p className="text-gray-700 text-sm sm:text-lg mb-4 sm:mb-6 leading-relaxed">
             {t('testimonials_subtitle')}
           </p>
 
           <Button 
             onClick={() => setIsReviewFormOpen(true)}
-            className="bg-[#0f4c81] hover:bg-blue-900 text-white px-8 py-6 text-lg"
+            className="bg-[#0f4c81] hover:bg-blue-900 text-white px-6 sm:px-8 py-4 sm:py-6 text-sm sm:text-lg"
           >
             {t('testimonials_add_review')}
           </Button>
@@ -116,13 +116,13 @@ export default function Testimonials() {
           {/* LIGHTER GRADIENT (FIXED) */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f4c81]/60 via-[#0f4c81]/30 to-transparent flex items-center">
 
-            <div className="max-w-xl px-12">
+            <div className="max-w-xl px-3">
 
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 leading-tight">
                 {t('testimonials_trusted_title')}
               </h3>
 
-              <p className="text-white/90 mb-6">
+              <p className="text-white/90 text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
                 {t('testimonials_trusted_subtitle')}
               </p>
 
@@ -137,8 +137,8 @@ export default function Testimonials() {
                 </div>
 
                 <div className="text-white">
-                  <p className="text-2xl font-bold">5M+</p>
-                  <p className="text-sm opacity-80">
+                  <p className="text-xl sm:text-2xl font-bold">5M+</p>
+                  <p className="text-xs sm:text-sm opacity-80 leading-relaxed">
                     {t('testimonials_reports_generated')}
                   </p>
                 </div>

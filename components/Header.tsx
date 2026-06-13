@@ -3,18 +3,33 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { X, Menu } from 'lucide-react'
 import { useTranslations } from '@/lib/translations'
 
 export default function Header() {
   const { t } = useTranslations()
+  const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const navLink =
-    "relative text-gray-700 hover:text-[#0f4c81] transition-all font-semibold group"
+  const isActiveLink = (href: string) => {
+    if (href === '/') return pathname === '/'
+    return pathname.startsWith(href)
+  }
 
-  const activeLine =
-    "absolute left-0 -bottom-1 w-0 h-[2px] bg-[#0f4c81] group-hover:w-full transition-all duration-300"
+  const navLink = (href: string) =>
+    `relative font-medium tracking-wide transition-all duration-300 group ${
+      isActiveLink(href)
+        ? 'text-[#0f4c81] rounded-full px-1 py-1'
+        : 'text-gray-700 hover:text-[#0f4c81]'
+    }`
+
+  const activeLine = (href: string) =>
+    `absolute left-0 -bottom-1 h-[2px] transition-all duration-300 ${
+      isActiveLink(href)
+        ? 'w-full bg-[#0f4c81]'
+        : 'w-0 bg-[#0f4c81] group-hover:w-full'
+    }`
 
   return (
     <>
@@ -36,24 +51,24 @@ export default function Header() {
 
             {/* NAV */}
             <nav className="hidden md:flex items-center space-x-10">
-              <Link href="/" className={navLink}>
+              <Link href="/" className={navLink('/')}>
                 {t('nav_home')}
-                <span className={activeLine}></span>
+                <span className={activeLine('/')}></span>
               </Link>
 
-              <Link href="/pricing" className={navLink}>
+              <Link href="/pricing" className={navLink('/pricing')}>
                 {t('nav_pricing')}
-                <span className={activeLine}></span>
+                <span className={activeLine('/pricing')}></span>
               </Link>
 
-              <Link href="/contact-us" className={navLink}>
+              <Link href="/contact-us" className={navLink('/contact-us')}>
                 {t('nav_contact')}
-                <span className={activeLine}></span>
+                <span className={activeLine('/contact-us')}></span>
               </Link>
 
-              <Link href="/about-us" className={navLink}>
+              <Link href="/about-us" className={navLink('/about-us')}>
                 {t('nav_about')}
-                <span className={activeLine}></span>
+                <span className={activeLine('/about-us')}></span>
               </Link>
             </nav>
 
@@ -94,11 +109,11 @@ export default function Header() {
             </button>
           </div>
 
-          <div className="space-y-4 text-lg font-semibold">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-[#0f4c81]">Home</Link>
-            <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-[#0f4c81]">Pricing</Link>
-            <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-[#0f4c81]">Contact</Link>
-            <Link href="/about-us" onClick={() => setIsMobileMenuOpen(false)} className="block hover:text-[#0f4c81]">About</Link>
+          <div className="space-y-3 text-sm sm:text-base font-semibold tracking-wide">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className={`block rounded-xl px-3 py-2 transition ${isActiveLink('/') ? 'bg-gradient-to-r from-[#0f4c81] to-blue-500 text-white shadow-[0_0_18px_rgba(56,189,248,0.18)]' : 'text-gray-800 hover:bg-blue-50 hover:text-[#0f4c81]'}`} >Home</Link>
+            <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className={`block rounded-xl px-3 py-2 transition ${isActiveLink('/pricing') ? 'bg-gradient-to-r from-[#0f4c81] to-blue-500 text-white shadow-[0_0_18px_rgba(56,189,248,0.18)]' : 'text-gray-800 hover:bg-blue-50 hover:text-[#0f4c81]'}`} >Pricing</Link>
+            <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className={`block rounded-xl px-3 py-2 transition ${isActiveLink('/contact-us') ? 'bg-gradient-to-r from-[#0f4c81] to-blue-500 text-white shadow-[0_0_18px_rgba(56,189,248,0.18)]' : 'text-gray-800 hover:bg-blue-50 hover:text-[#0f4c81]'}`} >Contact</Link>
+            <Link href="/about-us" onClick={() => setIsMobileMenuOpen(false)} className={`block rounded-xl px-3 py-2 transition ${isActiveLink('/about-us') ? 'bg-gradient-to-r from-[#0f4c81] to-blue-500 text-white shadow-[0_0_18px_rgba(56,189,248,0.18)]' : 'text-gray-800 hover:bg-blue-50 hover:text-[#0f4c81]'}`} >About</Link>
           </div>
         </div>
       )}

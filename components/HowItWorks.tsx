@@ -65,10 +65,10 @@ export default function HowItWorks() {
 
         {/* HEADER */}
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
             {t('howitworks_title')}
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-700">
+          <p className="text-xs sm:text-sm md:text-lg text-gray-700 leading-relaxed">
             {t('howitworks_subtitle')}
           </p>
         </div>
@@ -87,14 +87,14 @@ export default function HowItWorks() {
                 }`}
               >
 
-                <div className="flex gap-5 items-start">
+                <div className="flex gap-3 sm:gap-5 items-start">
 
                   {/* NUMBER BADGE */}
                   <div className="relative">
                     <div className="absolute inset-0 bg-[#0f4c81] blur-xl opacity-30 rounded-2xl"></div>
 
-                    <div className="w-16 h-16 bg-[#0f4c81] rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition">
-                      <span className="text-white text-2xl font-bold">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#0f4c81] rounded-2xl flex items-center justify-center shadow-lg hover:scale-110 transition shrink-0">
+                      <span className="text-white text-xl sm:text-2xl font-bold">
                         {step.number}
                       </span>
                     </div>
@@ -103,11 +103,11 @@ export default function HowItWorks() {
                   {/* CONTENT */}
                   <div>
 
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-[#0f4c81] transition">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2 hover:text-[#0f4c81] transition leading-tight">
                       {t(step.titleKey)}
                     </h3>
 
-                    <p className="text-gray-600 text-sm mb-3 leading-relaxed">
+                    <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3 leading-relaxed">
                       {t(step.descKey)}
                     </p>
 
@@ -130,10 +130,10 @@ export default function HowItWorks() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-10 sm:mt-12">
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-2 bg-[#0f4c81] hover:bg-[#0f4c81] text-white font-bold px-8 py-4 rounded-full transition hover:scale-105"
+            className="inline-flex items-center gap-2 bg-[#0f4c81] hover:bg-[#0f4c81] text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full transition hover:scale-105 text-sm sm:text-base"
           >
             {t('howitworks_cta')}
             <ArrowRight className="w-5 h-5" />
